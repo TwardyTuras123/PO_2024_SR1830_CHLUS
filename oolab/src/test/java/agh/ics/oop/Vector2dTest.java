@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Vector2d;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -77,4 +78,59 @@ class Vector2dTest {
         assertEquals(v1.add(v2), v3);
         assertEquals(v1.add(v4), v5);
     }
+
+    @Test
+    void testSubtractionVector() {
+        //given
+        Vector2d v1 = new Vector2d(5,5);
+        Vector2d v2 = new Vector2d(5,5);
+        Vector2d v3 = new Vector2d(0,0);
+        Vector2d v4 = new Vector2d(-3,-5);
+        Vector2d v5 = new Vector2d(8,10);
+        //when
+        Vector2d v6 = v1.subtract(v2);
+        Vector2d v7 = v1.subtract(v4);
+        //then
+        assertEquals(v3, v6);
+        assertEquals(v5, v7);
+    }
+
+    @Test
+    void testUpperRightFunc() {
+        //given
+        Vector2d v1 = new Vector2d(5,5);
+        Vector2d v2 = new Vector2d(-1,5);
+        Vector2d v3 = new Vector2d(5,-1);
+        Vector2d v4 = new Vector2d(-1,-1);
+        //when
+        Vector2d v5 = v1.upperRight(v1);
+        Vector2d v6 = v1.upperRight(v2);
+        Vector2d v7 = v1.upperRight(v3);
+        Vector2d v8 = v1.upperRight(v4);
+        //then
+        assertEquals(v1, v5);
+        assertEquals(v1, v6);
+        assertEquals(v1, v7);
+        assertEquals(v1, v8);
+    }
+
+    @Test
+    void testLowerLeftFunc() {
+        //given
+        Vector2d v1 = new Vector2d(5,5);
+        Vector2d v2 = new Vector2d(-1,5);
+        Vector2d v3 = new Vector2d(5,-1);
+        Vector2d v4 = new Vector2d(-1,-1);
+        //when
+        Vector2d v5 = v4.lowerLeft(v4);
+        Vector2d v6 = v4.lowerLeft(v3);
+        Vector2d v7 = v4.lowerLeft(v2);
+        Vector2d v8 = v4.lowerLeft(v1);
+        //then
+        assertEquals(v4, v5);
+        assertEquals(v4, v6);
+        assertEquals(v4, v7);
+        assertEquals(v4, v8);
+    }
+
 }
