@@ -1,6 +1,7 @@
 //Tutaj pisz sw
 package agh.ics.oop;
 
+import agh.ics.oop.model.MapDirection;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,27 +1,27 @@
 package agh.ics.oop;
 
-
 import agh.ics.oop.model.MoveDirection;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class OptionsParser {
-    public static MoveDirection[] parse(String[] args){
-        int argsLength = args.length;
-        MoveDirection[] moves = new MoveDirection[argsLength];
-        int j = 0;
-        for (int i = 0; i < argsLength; i++) {
-            switch (args[i]) {
-                case "l" -> moves[i-j] = MoveDirection.LEFT;
-                case "r" -> moves[i-j] = MoveDirection.RIGHT;
-                case "b" -> moves[i-j] = MoveDirection.BACKWARD;
-                case "f" -> moves[i-j] = MoveDirection.FORWARD;
-                default -> j++;
+    public static List<MoveDirection> parse(String[] args){
+        List<MoveDirection> moves = new ArrayList<>();
+        for (String arg : args) {
+            switch (arg) {
+                case "l" -> moves.add(MoveDirection.LEFT);
+                case "r" -> moves.add(MoveDirection.RIGHT);
+                case "f" -> moves.add(MoveDirection.FORWARD);
+                case "b" -> moves.add(MoveDirection.BACKWARD);
+                default -> /*throw new IllegalArgumentException("Nie możesz sie poruszyć w " + arg)*/
+                        System.out.println("cos");
             };
 
 
         }
-        return Arrays.copyOfRange(moves, 0, argsLength-j);
+        return moves;
     }
 
 
