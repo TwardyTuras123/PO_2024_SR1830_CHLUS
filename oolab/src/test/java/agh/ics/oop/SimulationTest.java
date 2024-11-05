@@ -1,9 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -21,9 +18,10 @@ class SimulationTest {
                 MoveDirection.LEFT,
                 MoveDirection.FORWARD
         );
+        RectangularMap map = new RectangularMap(4,4);
 
         //when
-        Simulation simulation = new Simulation(positions, moves);
+        Simulation simulation = new Simulation(positions, moves, map);
         simulation.run();
         Animal animal = simulation.getAnimals().get(0);
 
@@ -36,8 +34,9 @@ class SimulationTest {
         //given
         List<Vector2d> positions = List.of(new Vector2d(0, 0), new Vector2d(1, 0), new Vector2d(2, 0));
         List<MoveDirection> moves = List.of(MoveDirection.RIGHT, MoveDirection.LEFT, MoveDirection.RIGHT, MoveDirection.RIGHT);
+        RectangularMap map = new RectangularMap(4,4);
         //when
-        Simulation simulation = new Simulation(positions, moves);
+        Simulation simulation = new Simulation(positions, moves, map);
         simulation.run();
         //then
         List<Animal> animals = simulation.getAnimals();
@@ -57,8 +56,9 @@ class SimulationTest {
         //given
         List<Vector2d> positions = List.of(new Vector2d(0, 0));
         List<MoveDirection> moves = List.of(MoveDirection.RIGHT, MoveDirection.FORWARD, MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.FORWARD);
+        RectangularMap map = new RectangularMap(4,4);
         //when
-        Simulation simulation = new Simulation(positions, moves);
+        Simulation simulation = new Simulation(positions, moves, map);
         simulation.run();
         //then
         Animal animal = simulation.getAnimals().get(0);
@@ -81,5 +81,23 @@ class SimulationTest {
         assertEquals(expectedDirections, parsedDirections);
     }
 
+    @Test
+    void testCollisionsBetweenAnimals() {
+        //given
+        List<Vector2d> positions = List.of(new Vector2d(0, 0), new Vector2d(1, 0));
+        List<MoveDirection> moves = List.of(MoveDirection.RIGHT, MoveDirection.LEFT, MoveDirection.FORWARD, MoveDirection.FORWARD);
+        RectangularMap map = new RectangularMap(4,4);
+
+        //when
+        Simulation simulation = new Simulation(positions, moves, map);
+        simulation.run();
+
+        //then
+        Animal animal1 = simulation.getAnimals().get(0);
+        Animal animal2 = simulation.getAnimals().get(1);
+        assertTrue(animal1.getPosition().getX() == 0 && animal1.getPosition().getY() == 0);
+        assertTrue(animal2.getPosition().getX() == 1 && animal2.getPosition().getY() == 0);
+
+    }
     }
 
