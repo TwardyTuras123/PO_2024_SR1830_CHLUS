@@ -26,8 +26,17 @@ class OptionsParserTest {
 
     @Test
     void testParseWrongInputs() {
-        String[] args = {"f", "b", "l", "r", "x"};
-        assertThrows(IllegalArgumentException.class, () -> OptionsParser.parse(args));
-
+        //given
+        String[] args = {"f", "b", "l", "v", "r", "x"};
+        //when
+        List<MoveDirection> expectedMoves = List.of(
+                MoveDirection.FORWARD,
+                MoveDirection.BACKWARD,
+                MoveDirection.LEFT,
+                MoveDirection.RIGHT
+        );
+        List<MoveDirection> actualMoves = OptionsParser.parse(args);
+        //then
+        assertEquals(expectedMoves, actualMoves);
     }
 }

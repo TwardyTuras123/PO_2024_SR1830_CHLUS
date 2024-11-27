@@ -4,13 +4,13 @@ import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.WorldMap;
+import agh.ics.oop.model.util.IncorrectPositionException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
-    private static String animalName = "Zwierze";
-    private final List<Animal> animals;
+    private final List<Animal> animals = new ArrayList<>();
     private final List<MoveDirection> moves;
     private final WorldMap worldMap;
 
@@ -18,22 +18,28 @@ public class Simulation {
         return animals;
     }
 
-    public Simulation(List<Vector2d> begPositions, List<MoveDirection> moveList, WorldMap worldMap) {
-        this.worldMap = worldMap;
-        this.animals = new ArrayList<>();
-        this.moves = moveList;
+    public Simulation(List<Vector2d> begPositions, List<MoveDirection> moveList, WorldMap map) {
+        worldMap = map;
+        moves = moveList;
 
         for (Vector2d position : begPositions) {
-            animals.add(new Animal(position));
+            Animal newAnimal = new Animal(position);
+
+            try {
+                map.place(newAnimal);
+                animals.add(newAnimal);
+            }
+            catch (IncorrectPositionException e) {
+                e.printStackTrace(System.err);
+            }
+
         }
         System.out.println(animals);
     }
 
     public void run (){
-        System.out.println(worldMap);
         for (int i = 0; i < moves.size(); i++) {
             worldMap.move(animals.get(i % animals.size()), moves.get(i));
-            System.out.println(worldMap);
         }
     }
 }
