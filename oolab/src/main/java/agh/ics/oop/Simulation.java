@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
-    private static String animalName = "Zwierze";
-    private final List<Animal> animals;
+    private final List<Animal> animals = new ArrayList<>();
     private final List<MoveDirection> moves;
     private final WorldMap worldMap;
 
@@ -20,11 +19,13 @@ public class Simulation {
 
     public Simulation(List<Vector2d> begPositions, List<MoveDirection> moveList, WorldMap worldMap) {
         this.worldMap = worldMap;
-        this.animals = new ArrayList<>();
         this.moves = moveList;
 
         for (Vector2d position : begPositions) {
-            animals.add(new Animal(position));
+            Animal newAnimal = new Animal(position);
+            if (this.worldMap.place(newAnimal)) {
+                this.animals.add(newAnimal);
+            }
         }
         System.out.println(animals);
     }

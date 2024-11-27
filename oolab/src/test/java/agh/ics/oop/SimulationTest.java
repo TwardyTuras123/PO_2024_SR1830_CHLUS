@@ -99,5 +99,7 @@ class SimulationTest {
         assertTrue(animal2.getPosition().getX() == 1 && animal2.getPosition().getY() == 0);
 
     }
+
+
     }
 

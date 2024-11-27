@@ -1,7 +1,7 @@
 package agh.ics.oop.model;
 
 
-public class Animal {
+public class Animal implements WorldElement {
 
     private MapDirection direction;
     private Vector2d position;
@@ -31,13 +31,12 @@ public class Animal {
 
     @Override
     public String toString() {
-        switch (direction) {
-            case NORTH: return "N";
-            case EAST: return "E";
-            case SOUTH: return "S";
-            case WEST: return "W";
-        }
-        return null;
+        return switch (direction) {
+            case NORTH -> "^";
+            case EAST -> ">";
+            case SOUTH -> "v";
+            case WEST -> "<";
+        };
     }
 
     public boolean isAt(Vector2d position) {
