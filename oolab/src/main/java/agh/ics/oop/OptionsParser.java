@@ -15,8 +15,7 @@ public class OptionsParser {
                 case "r" -> moves.add(MoveDirection.RIGHT);
                 case "f" -> moves.add(MoveDirection.FORWARD);
                 case "b" -> moves.add(MoveDirection.BACKWARD);
-                default -> /*throw new IllegalArgumentException("Nie możesz sie poruszyć w " + arg)*/
-                        System.out.println("cos");
+                default -> throw new IllegalArgumentException(arg + " is not legal move specification");
             };
 
 

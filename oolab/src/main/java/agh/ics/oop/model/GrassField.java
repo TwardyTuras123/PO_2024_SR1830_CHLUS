@@ -1,4 +1,5 @@
 package agh.ics.oop.model;
+import agh.ics.oop.model.util.Boundary;
 import agh.ics.oop.model.util.MapVisualizer;
 
 import java.lang.Math;
@@ -37,6 +38,11 @@ public class GrassField extends AbstractWorldMap {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Boundary getCurrentBoundary() {
+        return null;
     }
 
     @Override
