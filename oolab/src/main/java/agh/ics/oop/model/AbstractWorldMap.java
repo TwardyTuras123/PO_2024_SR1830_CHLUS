@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractWorldMap implements WorldMap {
+    protected final int id = this.hashCode();
     protected final Vector2d lowerLeftEnd, upperRightEnd;
     private final Map<Vector2d, Animal> animalList = new HashMap<>();
     protected final MapVisualizer mapVisualizer = new MapVisualizer(this);
@@ -64,7 +65,7 @@ public abstract class AbstractWorldMap implements WorldMap {
             Vector2d oldPosition = animal.getPosition();
             animal.move(direction, this);
             animalList.put(animal.getPosition(), animal);
-            mapChangedEvent("Animal moved from %s to %s and is went %s".formatted(oldPosition, animal.getPosition() ,direction));
+            mapChangedEvent("Animal moved from %s to %s and it moved %s".formatted(oldPosition, animal.getPosition() ,direction));
         }
     }
 
@@ -94,5 +95,10 @@ public abstract class AbstractWorldMap implements WorldMap {
     public String toString(){
         Boundary currentBoundary = getCurrentBoundary();
         return mapVisualizer.draw(currentBoundary.topRight(), currentBoundary.bottomLeft());
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 }
